@@ -21,5 +21,4 @@ public class LoginController
     {
         return loginService.checkAuth(user.getEmail(), user.getPassword());
     }
-
 }
