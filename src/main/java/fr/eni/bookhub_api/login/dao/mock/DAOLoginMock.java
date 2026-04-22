@@ -24,7 +24,7 @@ public class DAOLoginMock implements ILoginDAO
     @Override
     public User findByLogin(String login,String password) {
         return users.stream()
-                .filter(user -> user.email.equals(login) && user.password.equals(password))
+                .filter(user -> user.getEmail().equals(login) && user.getPassword().equals(password))
                 .findFirst()
                 .orElse(null);
     }

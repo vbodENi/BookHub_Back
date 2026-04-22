@@ -1,13 +1,21 @@
 package fr.eni.bookhub_api.common;
 
+import fr.eni.bookhub_api.common.enumeration.Roles;
+
+import java.time.LocalDateTime;
+
 public class User
 {
-    public Integer id;
-    public String firstName;
-    public String lastName;
-    public String email;
-    public String password;
-    public String role;
+    private Integer id;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String password;
+    private String phoneNumber;
+    private LocalDateTime dateOfInscription;
+    private boolean active;
+    private boolean blocked;
+    private Roles eRoles;
 
     public User() {
     }
@@ -17,13 +25,17 @@ public class User
         this.password = password;
     }
 
-    public User(String role, String password, String email, String lastName, String firstName, Integer id) {
-        this.role = role;
-        this.password = password;
-        this.email = email;
-        this.lastName = lastName;
-        this.firstName = firstName;
+    public User(Integer id, String firstName, String lastName, String email, String password, String phoneNumber, LocalDateTime dateOfInscription, boolean active, boolean blocked, Roles eRoles) {
         this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.dateOfInscription = dateOfInscription;
+        this.active = active;
+        this.blocked = blocked;
+        this.eRoles = eRoles;
     }
 
     public Integer getId() {
@@ -66,11 +78,43 @@ public class User
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public LocalDateTime getDateOfInscription() {
+        return dateOfInscription;
+    }
+
+    public void setDateOfInscription(LocalDateTime dateOfInscription) {
+        this.dateOfInscription = dateOfInscription;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
+    }
+
+    public Roles geteRoles() {
+        return eRoles;
+    }
+
+    public void seteRoles(Roles eRoles) {
+        this.eRoles = eRoles;
     }
 }
