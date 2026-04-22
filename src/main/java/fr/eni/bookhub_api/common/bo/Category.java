@@ -15,7 +15,7 @@ public class Category {
     }
 
     // Full constructor
-    public Category(int id, String label, String description, List<Book> books) {
+    public Category(Integer id, String label, String description, List<Book> books) {
         this.id = id;
         this.label = label;
         this.description = description;
@@ -24,11 +24,11 @@ public class Category {
 
     // Getters and Setters
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

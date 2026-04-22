@@ -7,7 +7,7 @@ import java.util.List;
 
 public class User {
 
-    private int id;
+    private Integer id;
     private String lastName;
     private String firstName;
     private String email;
@@ -33,7 +33,7 @@ public class User {
     }
 
     // Full constructor
-    public User(int id, String lastName, String firstName, String email,
+    public User(Integer id, String lastName, String firstName, String email,
                 String password, String phone, Roles role,
                 LocalDateTime registrationDate, boolean active, boolean blocked,
                 List<Loans> loans, List<Reservation> reservations,
@@ -59,11 +59,11 @@ public class User {
 
     // Getters and Setters
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

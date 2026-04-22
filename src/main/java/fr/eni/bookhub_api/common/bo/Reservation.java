@@ -18,7 +18,7 @@ public class Reservation {
     }
 
     // Full constructor
-    public Reservation(int id, User user, Book book,
+    public Reservation(Integer id, User user, Book book,
                        LocalDateTime reservationDate, ReservationStatus eReservationstatus) {
         this.id = id;
         this.user = user;
@@ -29,11 +29,11 @@ public class Reservation {
 
     // Getters and Setters
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
