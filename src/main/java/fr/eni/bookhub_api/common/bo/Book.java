@@ -16,7 +16,7 @@ public class Book {
     private int availableCopies;
     private LocalDateTime dateAdded;
     private Double averageRating;
-    private List<Borrow> borrows;
+    private List<Loans> loans;
     private List<Reservation> reservations;
     private List<Rating> ratings;
     private List<Comment> comments;
@@ -29,7 +29,7 @@ public class Book {
     public Book(Long id, Category category, String title, String author, String isbn,
                 String description, String coverUrl, int totalCopies,
                 int availableCopies, LocalDateTime dateAdded,
-                Double averageRating, List<Borrow> borrows,
+                Double averageRating, List<Loans> loans,
                 List<Reservation> reservations, List<Rating> ratings,
                 List<Comment> comments) {
 
@@ -44,11 +44,18 @@ public class Book {
         this.availableCopies = availableCopies;
         this.dateAdded = dateAdded;
         this.averageRating = averageRating;
-        this.borrows = borrows;
+        this.loans = loans;
         this.reservations = reservations;
         this.ratings = ratings;
         this.comments = comments;
     }
+
+    public Book(String title, String author)
+    {
+        this.title = title;
+        this.author = author;
+    }
+
 
     // Getters and Setters
 
@@ -140,12 +147,12 @@ public class Book {
         this.averageRating = averageRating;
     }
 
-    public List<Borrow> getBorrows() {
-        return borrows;
+    public List<Loans> getBorrows() {
+        return loans;
     }
 
-    public void setBorrows(List<Borrow> borrows) {
-        this.borrows = borrows;
+    public void setBorrows(List<Loans> loans) {
+        this.loans = loans;
     }
 
     public List<Reservation> getReservations() {

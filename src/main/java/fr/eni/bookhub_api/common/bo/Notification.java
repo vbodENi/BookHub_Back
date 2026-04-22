@@ -1,6 +1,5 @@
 package fr.eni.bookhub_api.common.bo;
 
-import fr.eni.bookhub_api.common.User;
 import fr.eni.bookhub_api.common.enumeration.NotificationsTypes;
 
 import java.time.LocalDateTime;

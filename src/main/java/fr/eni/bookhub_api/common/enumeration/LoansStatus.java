@@ -1,6 +1,6 @@
 package fr.eni.bookhub_api.common.enumeration;
 
-public enum BorowsStatus {
+public enum LoansStatus {
     RENDU,
     RETARD
 }

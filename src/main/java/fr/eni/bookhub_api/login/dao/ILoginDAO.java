@@ -1,6 +1,6 @@
 package fr.eni.bookhub_api.login.dao;
 
-import fr.eni.bookhub_api.common.User;
+import fr.eni.bookhub_api.common.bo.User;
 
 public interface ILoginDAO
 {

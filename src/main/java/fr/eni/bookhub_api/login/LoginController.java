@@ -1,10 +1,7 @@
 package fr.eni.bookhub_api.login;
 
-import fr.eni.bookhub_api.common.ServiceResponse;
-import fr.eni.bookhub_api.common.User;
+import fr.eni.bookhub_api.common.bo.User;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @CrossOrigin
 @RestController

@@ -1,6 +1,5 @@
 package fr.eni.bookhub_api.common.bo;
 
-import fr.eni.bookhub_api.common.User;
 import java.time.LocalDateTime;
 
 public class Rating {
