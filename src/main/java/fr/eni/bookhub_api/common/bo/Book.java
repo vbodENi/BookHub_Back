@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Book {
 
-    private Long id;
+    private Integer id;
     private Category category;
     private String title;
     private String author;
@@ -26,7 +26,7 @@ public class Book {
     }
 
     // Full constructor
-    public Book(Long id, Category category, String title, String author, String isbn,
+    public Book(Integer id, Category category, String title, String author, String isbn,
                 String description, String coverUrl, int totalCopies,
                 int availableCopies, LocalDateTime dateAdded,
                 Double averageRating, List<Loans> loans,
@@ -59,11 +59,11 @@ public class Book {
 
     // Getters and Setters
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

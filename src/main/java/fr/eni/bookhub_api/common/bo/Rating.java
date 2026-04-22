@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class Rating {
 
-    private Long id;
+    private Integer id;
     private User user;
     private Book book;
     private int value;
@@ -15,7 +15,7 @@ public class Rating {
     }
 
     // Full constructor
-    public Rating(Long id, User user, Book book, int value, LocalDateTime ratingDate) {
+    public Rating(Integer id, User user, Book book, int value, LocalDateTime ratingDate) {
         this.id = id;
         this.user = user;
         this.book = book;
@@ -25,11 +25,11 @@ public class Rating {
 
     // Getters and Setters
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
