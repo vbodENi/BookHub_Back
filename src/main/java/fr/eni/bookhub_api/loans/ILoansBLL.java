@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ILoansBLL
 {
-    ServiceResponse<List<Loans>> addLoans(Loans loan);
+    ServiceResponse<Loans> addLoans(LoanRequest loanRequest);
 }

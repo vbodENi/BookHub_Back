@@ -16,15 +16,32 @@ public class LoansService implements ILoansBLL
         this.loansDAO = loansDAO;
     }
 
-    public ServiceResponse<List<Loans>> addLoans(Loans loan)
+    public ServiceResponse<Loans> addLoans(LoanRequest request)
     {
-        List<Loans> loans = loansDAO.addLoan(loan);
-        if(loans.size() == 3)
+        try
         {
-            return new ServiceResponse<>("7001", "Fail add loan");
+            Loans loan = loansDAO.addLoan(request);
+            return new ServiceResponse<>("2001", "Emprunt effectué avec succès", loan);
         }
+        catch (RuntimeException ex)
+        {
+            switch (ex.getMessage())
+            {
+                case "BOOK_ALREADY_BORROWED":
+                    return new ServiceResponse<>("7002", "Book already borrowed and not returned");
 
-        return new ServiceResponse<>("2002", "Success", loans);
+                case "MAX_LOANS_REACHED":
+                    return new ServiceResponse<>("7001", "Maximum 3 loans reached");
+
+                case "USER_NOT_FOUND":
+                    return new ServiceResponse<>("7003", "User unknown");
+
+                case "BOOK_NOT_FOUND":
+                    return new ServiceResponse<>("7004", "Book unknown");
+
+                default:
+                    return new ServiceResponse<>("7000", "Fatal error");
+            }
+        }
     }
-
 }

@@ -21,7 +21,7 @@ public class LoansController {
     }
 
     @PostMapping("/loans")
-    public ServiceResponse<List<Loans>> login(@RequestBody Loans loan) {
-        return loansBLL.addLoans(loan);
+    public ServiceResponse<Loans> addLoans(@RequestBody LoanRequest loanRequest) {
+        return loansBLL.addLoans(loanRequest);
     }
 }

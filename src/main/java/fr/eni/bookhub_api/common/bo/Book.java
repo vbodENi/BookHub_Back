@@ -1,28 +1,71 @@
 package fr.eni.bookhub_api.common.bo;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Entity
+@Table(name  = "BOOK")
 public class Book {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "CATEGORY_ID")
     private Category category;
+
+    @Column(name = "TITLE",length = 255, nullable = false)
     private String title;
+
+    @Column(name = "AUTHOR",length = 255, nullable = false)
     private String author;
+
+    @Column(name = "ISBN",length = 20, unique = true)
     private String isbn;
+
+    @Column(name = "DESCRIPTION",length = 250)
     private String description;
+
+    @Column(name = "COVER_URL",length = 255)
     private String coverUrl;
+
+    @Column(name = "TOTAL_COPIES",nullable = false)
     private int totalCopies;
+
+    @Column(name = "AVAILABLE_COPIES",nullable = false)
     private int availableCopies;
+
+    @Column(name = "DATE_ADDED",nullable = false)
     private LocalDateTime dateAdded;
+
+    @Column(name = "AVERAGE_RATING")
     private Double averageRating;
+
+    @OneToMany(mappedBy = "BOOK")
     private List<Loans> loans;
+
+    @OneToMany(mappedBy = "BOOK")
     private List<Reservation> reservations;
+
+    @OneToMany(mappedBy = "BOOK")
     private List<Rating> ratings;
+
+    @OneToMany(mappedBy = "BOOK")
     private List<Comment> comments;
+
+
 
     // Empty constructor
     public Book() {
+    }
+
+    public Book(Integer id, String title, String author) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
     }
 
     // Full constructor
