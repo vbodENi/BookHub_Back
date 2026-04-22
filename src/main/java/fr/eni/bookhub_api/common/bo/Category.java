@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Category {
 
-    private int id;
+    private Integer id;
     private String label;
     private String description;
     private List<Book> books;

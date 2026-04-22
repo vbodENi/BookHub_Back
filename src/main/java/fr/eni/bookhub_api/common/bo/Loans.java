@@ -1,27 +1,27 @@
 package fr.eni.bookhub_api.common.bo;
 
-import fr.eni.bookhub_api.common.enumeration.BorowsStatus;
+import fr.eni.bookhub_api.common.enumeration.LoansStatus;
 import java.time.LocalDateTime;
 
-public class Borrow {
+public class Loans {
 
-    private Long id;
+    private Integer id;
     private User user;
     private Book book;
     private LocalDateTime borrowDate;
     private LocalDateTime expectedReturnDate;
     private LocalDateTime actualReturnDate;
-    private BorowsStatus eBorowsStatus;
+    private LoansStatus eLoansStatus;
     private int lateDays;
 
     // Empty constructor
-    public Borrow() {
+    public Loans() {
     }
 
     // Full constructor
-    public Borrow(Long id, User user, Book book, LocalDateTime borrowDate,
-                  LocalDateTime expectedReturnDate, LocalDateTime actualReturnDate,
-                  BorowsStatus eBorowsStatus, int lateDays) {
+    public Loans(Integer id, User user, Book book, LocalDateTime borrowDate,
+                 LocalDateTime expectedReturnDate, LocalDateTime actualReturnDate,
+                 LoansStatus eLoansStatus, int lateDays) {
 
         this.id = id;
         this.user = user;
@@ -29,17 +29,17 @@ public class Borrow {
         this.borrowDate = borrowDate;
         this.expectedReturnDate = expectedReturnDate;
         this.actualReturnDate = actualReturnDate;
-        this.eBorowsStatus = eBorowsStatus;
+        this.eLoansStatus = eLoansStatus;
         this.lateDays = lateDays;
     }
 
     // Getters and Setters
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -83,12 +83,12 @@ public class Borrow {
         this.actualReturnDate = actualReturnDate;
     }
 
-    public BorowsStatus getStatus() {
-        return eBorowsStatus;
+    public LoansStatus getStatus() {
+        return eLoansStatus;
     }
 
-    public void setStatus(BorowsStatus status) {
-        this.eBorowsStatus = status;
+    public void setStatus(LoansStatus status) {
+        this.eLoansStatus = status;
     }
 
     public int getLateDays() {

@@ -17,7 +17,7 @@ public class User {
     private LocalDateTime registrationDate;
     private boolean active;
     private boolean blocked;
-    private List<Borrow> borrows;
+    private List<Loans> loans;
     private List<Reservation> reservations;
     private List<Rating> ratings;
     private List<Comment> comments;
@@ -36,7 +36,7 @@ public class User {
     public User(int id, String lastName, String firstName, String email,
                 String password, String phone, Roles role,
                 LocalDateTime registrationDate, boolean active, boolean blocked,
-                List<Borrow> borrows, List<Reservation> reservations,
+                List<Loans> loans, List<Reservation> reservations,
                 List<Rating> ratings, List<Comment> comments,
                 List<Notification> notifications) {
 
@@ -50,7 +50,7 @@ public class User {
         this.registrationDate = registrationDate;
         this.active = active;
         this.blocked = blocked;
-        this.borrows = borrows;
+        this.loans = loans;
         this.reservations = reservations;
         this.ratings = ratings;
         this.comments = comments;
@@ -140,12 +140,12 @@ public class User {
         this.blocked = blocked;
     }
 
-    public List<Borrow> getBorrows() {
-        return borrows;
+    public List<Loans> getBorrows() {
+        return loans;
     }
 
-    public void setBorrows(List<Borrow> borrows) {
-        this.borrows = borrows;
+    public void setBorrows(List<Loans> loans) {
+        this.loans = loans;
     }
 
     public List<Reservation> getReservations() {
