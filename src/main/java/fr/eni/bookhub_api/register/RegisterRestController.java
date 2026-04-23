@@ -1,4 +1,4 @@
 package fr.eni.bookhub_api.register;
 
-public interface RegisterRepository {
+public class RegisterRestController {
 }
