@@ -1,30 +1,70 @@
 package fr.eni.bookhub_api.common.bo;
 
 import fr.eni.bookhub_api.common.enumeration.Roles;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Entity
+@Table(name  = "USERS")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "LAST_NAME",length = 100, nullable = false)
     private String lastName;
+
+    @Column(name = "FIRST_NAME",length = 100, nullable = false)
     private String firstName;
+
+    @Column(name = "EMAIL",length = 255, nullable = false)
     private String email;
+
+    @Column(name = "PASSWORD",length = 255, nullable = false)
     private String password;
+
+    @Column(name = "PHONE",length = 255)
     private String phone;
+
+    @Column(name = "ROLE",length = 50, nullable = false)
     private Roles role;
+
+    @Column(name = "REGISTRATION_DATE",nullable = false)
     private LocalDateTime registrationDate;
+
+    @Column(name = "ACTIVE",nullable = false)
     private boolean active;
+
+    @Column(name = "BLOCKED",nullable = false)
     private boolean blocked;
+
+    @OneToMany(mappedBy = "user")
     private List<Loans> loans;
-    private List<Reservation> reservations;
-    private List<Rating> ratings;
-    private List<Comment> comments;
+
+    @OneToMany(mappedBy = "user")
     private List<Notification> notifications;
+
+    @OneToMany(mappedBy = "user")
+    private List<Reservation> reservations;
+
+    @OneToMany(mappedBy = "user")
+    private List<Rating> ratings;
+
+    @OneToMany(mappedBy = "user")
+    private List<Comment> comments;
+
 
     // Empty constructor
     public User() {
+    }
+
+    public User(Integer id, String email, String password) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
     }
 
     public User(String email, String password) {

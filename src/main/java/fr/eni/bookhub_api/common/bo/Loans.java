@@ -1,18 +1,40 @@
 package fr.eni.bookhub_api.common.bo;
 
 import fr.eni.bookhub_api.common.enumeration.LoansStatus;
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name  = "LOANS")
 public class Loans {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private User user;
-    private Book book;
+
+    @Column(name = "BORROW_DATE",nullable = false)
     private LocalDateTime borrowDate;
+
+    @Column(name = "EXCEPTED_RETURN_DATE",nullable = false)
     private LocalDateTime expectedReturnDate;
+
+    @Column(name = "ACTUAL_RETURN_DATE")
     private LocalDateTime actualReturnDate;
+
+    @Column(name = "LOAN_STATUS",length = 50,nullable = false)
     private LoansStatus eLoansStatus;
+
+    @Column(name = "LATE_DAYS")
     private int lateDays;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_BOOK")
+    private Book book;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_USER")
+    private User user;
 
     // Empty constructor
     public Loans() {
