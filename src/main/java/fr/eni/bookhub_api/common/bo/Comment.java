@@ -13,6 +13,7 @@ public class Comment
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "STATUS",length = 255, nullable = false)
     private ModerationStatuts eModerationStatuts;
 
