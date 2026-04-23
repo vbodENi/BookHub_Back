@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name  = "USER")
+@Table(name  = "USERS")
 public class User {
 
     @Id
@@ -41,19 +41,19 @@ public class User {
     @Column(name = "BLOCKED",nullable = false)
     private boolean blocked;
 
-    @OneToMany(mappedBy = "USER")
+    @OneToMany(mappedBy = "user")
     private List<Loans> loans;
 
-    @OneToMany(mappedBy = "USER")
+    @OneToMany(mappedBy = "user")
     private List<Notification> notifications;
 
-    @OneToMany(mappedBy = "USER")
+    @OneToMany(mappedBy = "user")
     private List<Reservation> reservations;
 
-    @OneToMany(mappedBy = "USER")
+    @OneToMany(mappedBy = "user")
     private List<Rating> ratings;
 
-    @OneToMany(mappedBy = "USER")
+    @OneToMany(mappedBy = "user")
     private List<Comment> comments;
 
 

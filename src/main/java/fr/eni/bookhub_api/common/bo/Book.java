@@ -44,18 +44,17 @@ public class Book {
     @Column(name = "AVERAGE_RATING")
     private Double averageRating;
 
-    @OneToMany(mappedBy = "BOOK")
+    @OneToMany(mappedBy = "book")
     private List<Loans> loans;
 
-    @OneToMany(mappedBy = "BOOK")
+    @OneToMany(mappedBy = "book")
     private List<Reservation> reservations;
 
-    @OneToMany(mappedBy = "BOOK")
+    @OneToMany(mappedBy = "book")
     private List<Rating> ratings;
 
-    @OneToMany(mappedBy = "BOOK")
+    @OneToMany(mappedBy = "book")
     private List<Comment> comments;
-
 
 
     // Empty constructor

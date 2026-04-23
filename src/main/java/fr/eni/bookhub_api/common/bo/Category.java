@@ -18,7 +18,7 @@ public class Category {
     @Column(name = "DESCRIPTION",length = 255)
     private String description;
 
-    @OneToMany(mappedBy = "CATEGORY")
+    @OneToMany(mappedBy = "category")
     private List<Book> books;
 
     // Empty constructor

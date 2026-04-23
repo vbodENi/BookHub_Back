@@ -3,7 +3,7 @@ package fr.eni.bookhub_api.common.bo;
 import fr.eni.bookhub_api.common.enumeration.ReservationStatus;
 import jakarta.persistence.*;
 
-import java.awt.print.Book;
+
 import java.time.LocalDateTime;
 
 @Entity
