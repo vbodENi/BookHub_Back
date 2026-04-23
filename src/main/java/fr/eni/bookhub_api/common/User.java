@@ -1,6 +1,6 @@
 package fr.eni.bookhub_api.common;
 
-public class User
+public class   User
 {
     public Integer id;
     public String firstName;
