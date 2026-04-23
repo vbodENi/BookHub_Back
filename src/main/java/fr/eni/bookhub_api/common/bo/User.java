@@ -29,7 +29,8 @@ public class User {
     @Column(name = "PHONE",length = 255)
     private String phone;
 
-    @Column(name = "ROLE",length = 50, nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ROLE",length = 255,nullable = false)
     private Roles role;
 
     @Column(name = "REGISTRATION_DATE",nullable = false)

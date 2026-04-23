@@ -13,6 +13,7 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "TYPE",length = 150, nullable = false)
     private NotificationsTypes eTypeNotification;
 
