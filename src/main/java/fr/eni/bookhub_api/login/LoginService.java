@@ -1,12 +1,8 @@
 package fr.eni.bookhub_api.login;
 
-import fr.eni.bookhub_api.common.ServiceResponse;
-import fr.eni.bookhub_api.common.User;
+import fr.eni.bookhub_api.common.bo.User;
 import fr.eni.bookhub_api.login.dao.ILoginDAO;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class LoginService

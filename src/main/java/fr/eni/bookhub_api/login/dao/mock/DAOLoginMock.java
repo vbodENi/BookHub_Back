@@ -1,6 +1,6 @@
 package fr.eni.bookhub_api.login.dao.mock;
 
-import fr.eni.bookhub_api.common.User;
+import fr.eni.bookhub_api.common.bo.User;
 import fr.eni.bookhub_api.login.dao.ILoginDAO;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +24,7 @@ public class DAOLoginMock implements ILoginDAO
     @Override
     public User findByLogin(String login,String password) {
         return users.stream()
-                .filter(user -> user.email.equals(login) && user.password.equals(password))
+                .filter(user -> user.getEmail().equals(login) && user.getPassword().equals(password))
                 .findFirst()
                 .orElse(null);
     }
