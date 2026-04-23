@@ -13,10 +13,6 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "CATEGORY_ID")
-    private Category category;
-
     @Column(name = "TITLE",length = 255, nullable = false)
     private String title;
 
@@ -43,6 +39,10 @@ public class Book {
 
     @Column(name = "AVERAGE_RATING")
     private Double averageRating;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "CATEGORY_ID")
+    private Category category;
 
     @OneToMany(mappedBy = "book")
     private List<Loans> loans;

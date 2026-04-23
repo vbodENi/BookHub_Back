@@ -22,6 +22,7 @@ public class Loans {
     @Column(name = "ACTUAL_RETURN_DATE")
     private LocalDateTime actualReturnDate;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "LOAN_STATUS",length = 50,nullable = false)
     private LoansStatus eLoansStatus;
 
