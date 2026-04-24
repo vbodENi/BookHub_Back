@@ -53,7 +53,7 @@ public class LoansService implements ILoansService
                 );
                 loansResponse.add(response);
             });
-            if (loans.isEmpty()){
+            if (loansResponse.isEmpty()){
                 throw new RuntimeException("Any loans finds");
             }
 
