@@ -1,62 +1,41 @@
-package fr.eni.bookhub_api.common.bo;
+package fr.eni.bookhub_api.loans;
 
 import fr.eni.bookhub_api.common.enumeration.LoansStatus;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name  = "LOANS")
-public class Loans {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class LoanResponse
+{
     private Integer id;
 
-    @Column(name = "BORROW_DATE",nullable = false)
+    private String userName;
+
+    private String bookName;
+
     private LocalDateTime borrowDate;
 
-    @Column(name = "EXCEPTED_RETURN_DATE",nullable = false)
     private LocalDateTime expectedReturnDate;
 
-    @Column(name = "ACTUAL_RETURN_DATE")
     private LocalDateTime actualReturnDate;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "LOAN_STATUS",length = 50,nullable = false)
     private LoansStatus loanStatus;
 
-    @Column(name = "LATE_DAYS")
     private int lateDays;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_BOOK")
-    private Book book;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_USER")
-    private User user;
-
-    // Empty constructor
-    public Loans() {
+    public LoanResponse() {
     }
 
-    // Full constructor
-    public Loans(Integer id, User user, Book book, LocalDateTime borrowDate,
-                 LocalDateTime expectedReturnDate, LocalDateTime actualReturnDate,
-                 LoansStatus loanStatus, int lateDays) {
-
+    public LoanResponse(Integer id, String userName, String bookName, LocalDateTime borrowDate, LocalDateTime expectedReturnDate, LocalDateTime actualReturnDate, LoansStatus loanStatus, int lateDays) {
         this.id = id;
-        this.user = user;
-        this.book = book;
+        this.userName = userName;
+        this.bookName = bookName;
         this.borrowDate = borrowDate;
         this.expectedReturnDate = expectedReturnDate;
         this.actualReturnDate = actualReturnDate;
         this.loanStatus = loanStatus;
         this.lateDays = lateDays;
     }
-
-    // Getters and Setters
 
     public Integer getId() {
         return id;
@@ -66,20 +45,20 @@ public class Loans {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public Book getBook() {
-        return book;
+    public String getBookName() {
+        return bookName;
     }
 
-    public void setBook(Book book) {
-        this.book = book;
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
     }
 
     public LocalDateTime getBorrowDate() {
@@ -106,12 +85,12 @@ public class Loans {
         this.actualReturnDate = actualReturnDate;
     }
 
-    public LoansStatus getStatus() {
+    public LoansStatus getLoanStatus() {
         return loanStatus;
     }
 
-    public void setStatus(LoansStatus status) {
-        this.loanStatus = status;
+    public void setLoanStatus(LoansStatus loanStatus) {
+        this.loanStatus = loanStatus;
     }
 
     public int getLateDays() {
