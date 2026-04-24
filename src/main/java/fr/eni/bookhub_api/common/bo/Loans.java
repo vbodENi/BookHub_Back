@@ -2,12 +2,7 @@ package fr.eni.bookhub_api.common.bo;
 
 import fr.eni.bookhub_api.common.enumeration.LoansStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -37,7 +32,7 @@ public class Loans {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "LOAN_STATUS",length = 50,nullable = false)
-    private LoansStatus eLoansStatus;
+    private LoansStatus loanStatus;
 
     @Column(name = "LATE_DAYS")
     private int lateDays;
@@ -49,5 +44,4 @@ public class Loans {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_USER")
     private User user;
-
 }

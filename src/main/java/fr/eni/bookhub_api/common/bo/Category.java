@@ -2,12 +2,7 @@ package fr.eni.bookhub_api.common.bo;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
@@ -17,6 +12,7 @@ import java.util.List;
 @Setter
 @Builder
 @ToString
+
 
 @Entity
 @Table(name  = "CATEGORY")
@@ -34,6 +30,4 @@ public class Category {
 
     @OneToMany(mappedBy = "category")
     private List<Book> books;
-
-
 }

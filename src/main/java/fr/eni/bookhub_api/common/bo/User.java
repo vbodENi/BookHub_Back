@@ -2,13 +2,7 @@ package fr.eni.bookhub_api.common.bo;
 
 import fr.eni.bookhub_api.common.enumeration.Roles;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -72,10 +66,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Comment> comments;
 
-    public User(String email, String password) {
-        this.email = email;
+    public User(String mail, String password)
+    {
+        this.email = mail;
         this.password = password;
     }
-
-
 }

@@ -1,0 +1,7 @@
+package fr.eni.bookhub_api.common.dal;
+
+import fr.eni.bookhub_api.common.bo.Category;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CategoryRepository extends JpaRepository<Category, Integer> {
+}

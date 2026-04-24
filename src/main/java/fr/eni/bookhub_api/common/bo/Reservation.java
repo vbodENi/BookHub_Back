@@ -1,13 +1,9 @@
 package fr.eni.bookhub_api.common.bo;
 
+import fr.eni.bookhub_api.common.bo.compositeKey.ReservationId;
 import fr.eni.bookhub_api.common.enumeration.ReservationStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -18,29 +14,27 @@ import java.time.LocalDateTime;
 @Builder
 @ToString
 
+
 @Entity
 @Table(name  = "RESERVATION")
+@IdClass(ReservationId.class)
 public class Reservation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Column(name = "DATE",nullable = false)
-    private LocalDateTime reservationDate;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "STATUS",length = 255, nullable = false)
-    private ReservationStatus eReservationstatus;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_BOOK")
-    private Book book;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_USER")
     private User user;
 
- 
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_BOOK")
+    private Book book;
+
+    @Column(name = "DATE", nullable = false)
+    private LocalDateTime reservationDate;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "STATUS", length = 50, nullable = false)
+    private ReservationStatus eReservationstatus;
 }
 

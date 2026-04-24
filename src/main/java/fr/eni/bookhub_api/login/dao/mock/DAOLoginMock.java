@@ -12,7 +12,8 @@ public class DAOLoginMock implements ILoginDAO
 {
     private List<User> users;
 
-    public DAOLoginMock() {
+    public DAOLoginMock()
+    {
         users = new ArrayList<>();
 
         users.add(new User("loginMock@email.com", "123456Test"));

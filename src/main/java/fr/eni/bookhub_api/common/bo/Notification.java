@@ -2,12 +2,7 @@ package fr.eni.bookhub_api.common.bo;
 
 import fr.eni.bookhub_api.common.enumeration.NotificationsTypes;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -45,7 +40,4 @@ public class Notification {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_USER")
     private User user;
-
-
-
 }

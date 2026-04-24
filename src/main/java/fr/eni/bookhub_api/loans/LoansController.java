@@ -2,9 +2,7 @@ package fr.eni.bookhub_api.loans;
 
 import fr.eni.bookhub_api.common.ServiceResponse;
 import fr.eni.bookhub_api.common.bo.Loans;
-import fr.eni.bookhub_api.common.bo.User;
-import fr.eni.bookhub_api.loans.dao.ILoansDAO;
-import fr.eni.bookhub_api.login.LoginResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,14 +12,20 @@ import java.util.List;
 @RequestMapping("/api")
 public class LoansController {
 
-    private final ILoansBLL loansBLL;
+    private final ILoansService loansBLL;
 
-    public LoansController(ILoansBLL loansBLL) {
+    public LoansController(ILoansService loansBLL) {
         this.loansBLL = loansBLL;
     }
 
     @PostMapping("/loans")
-    public ServiceResponse<Loans> addLoans(@RequestBody LoanRequest loanRequest) {
-        return loansBLL.addLoans(loanRequest);
+    public ServiceResponse<LoanResponse> addLoans(@RequestBody LoanRequest loanRequest) {
+        return loansBLL.addLoan(loanRequest);
+    }
+
+    @GetMapping("/loans/{idUser}")
+    public ServiceResponse<?> findLoansByUser(@PathVariable("idUser") String idUser)
+    {
+        return loansBLL.findLoansByUser(idUser);
     }
 }

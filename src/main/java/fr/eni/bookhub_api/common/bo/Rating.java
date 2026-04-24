@@ -1,12 +1,8 @@
 package fr.eni.bookhub_api.common.bo;
 
+import fr.eni.bookhub_api.common.bo.compositeKey.RatingId;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -17,29 +13,25 @@ import java.time.LocalDateTime;
 @Builder
 @ToString
 
+
 @Entity
-@Table(name  = "RATING")
+@Table(name = "RATING")
+@IdClass(RatingId.class)
 public class Rating {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Column(name = "VALUE",nullable = false)
-    private int value;
-
-    @Column(name = "DATE",nullable = false)
-    private LocalDateTime ratingDate;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_BOOK")
-    private Book book;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_USER")
     private User user;
 
-  
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_BOOK")
+    private Book book;
 
+    @Column(name = "VALUE", nullable = false)
+    private int value;
+
+    @Column(name = "DATE", nullable = false)
+    private LocalDateTime ratingDate;
 }
-
