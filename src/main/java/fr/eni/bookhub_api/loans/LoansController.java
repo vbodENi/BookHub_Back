@@ -1,22 +1,31 @@
-//package fr.eni.bookhub_api.loans;
-//
-//import fr.eni.bookhub_api.common.ServiceResponse;
-//import fr.eni.bookhub_api.common.bo.Loans;
-//import org.springframework.web.bind.annotation.*;
-//
-//@CrossOrigin
-//@RestController
-//@RequestMapping("/api")
-//public class LoansController {
-//
-//    private final ILoansBLL loansBLL;
-//
-//    public LoansController(ILoansBLL loansBLL) {
-//        this.loansBLL = loansBLL;
-//    }
-//
-//    @PostMapping("/loans")
-//    public ServiceResponse<Loans> addLoans(@RequestBody LoanRequest loanRequest) {
-//        return loansBLL.addLoans(loanRequest);
-//    }
-//}
+package fr.eni.bookhub_api.loans;
+
+import fr.eni.bookhub_api.common.ServiceResponse;
+import fr.eni.bookhub_api.common.bo.Loans;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@CrossOrigin
+@RestController
+@RequestMapping("/api")
+public class LoansController {
+
+    private final ILoansService loansBLL;
+
+    public LoansController(ILoansService loansBLL) {
+        this.loansBLL = loansBLL;
+    }
+
+    @PostMapping("/loans")
+    public ServiceResponse<LoanResponse> addLoans(@RequestBody LoanRequest loanRequest) {
+        return loansBLL.addLoan(loanRequest);
+    }
+
+    @GetMapping("/loans/{idUser}")
+    public ServiceResponse<?> findLoansByUser(@PathVariable("idUser") String idUser)
+    {
+        return loansBLL.findLoansByUser(idUser);
+    }
+}

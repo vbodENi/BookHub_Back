@@ -9,9 +9,10 @@ import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Getter
 @Setter
+@Builder
+@ToString
 @EqualsAndHashCode(of = {"email"})
 
 @Entity
@@ -28,7 +29,7 @@ public class User {
     @Column(name = "FIRST_NAME",length = 100, nullable = false)
     private String firstName;
 
-    @Column(name = "EMAIL",length = 255, nullable = false, unique = true)
+    @Column(name = "EMAIL",length = 255, nullable = false)
     private String email;
 
     @Column(name = "PASSWORD",length = 255, nullable = false)
@@ -70,5 +71,4 @@ public class User {
         this.email = mail;
         this.password = password;
     }
-
 }

@@ -31,7 +31,7 @@ public class Loans {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "LOAN_STATUS",length = 50,nullable = false)
-    private LoansStatus eLoansStatus;
+    private LoansStatus loanStatus;
 
     @Column(name = "LATE_DAYS")
     private int lateDays;
