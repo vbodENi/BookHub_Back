@@ -1,7 +1,7 @@
 package fr.eni.bookhub_api.auth.register;
 
-import fr.eni.bookhub_api.auth.repository.UserRepository;
 import fr.eni.bookhub_api.common.bo.User;
+import fr.eni.bookhub_api.common.dal.UserRepository;
 import fr.eni.bookhub_api.common.enumeration.Roles;
 import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
