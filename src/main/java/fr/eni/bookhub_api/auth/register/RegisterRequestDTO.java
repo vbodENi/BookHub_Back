@@ -1,10 +1,16 @@
-package fr.eni.bookhub_api.register;
+package fr.eni.bookhub_api.auth.register;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class RegisterRequestDTO {
     @NotBlank(message = "Le prénom est obligatoire.")
     @Size(max = 100, message = "Le prénom ne peut pas dépasser 100 caractères.")
