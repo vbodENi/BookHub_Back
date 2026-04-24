@@ -2,8 +2,10 @@ package fr.eni.bookhub_api.books;
 
 import java.util.List;
 
-import fr.eni.bookhub_api.books.dao.BookRepository;
+
 import org.springframework.stereotype.Service;
+
+import fr.eni.bookhub_api.common.dal.BookRepository;
 
 
 @Service
