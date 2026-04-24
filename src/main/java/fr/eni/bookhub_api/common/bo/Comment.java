@@ -12,14 +12,12 @@ import java.time.LocalDateTime;
 @Builder
 @ToString
 
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Builder
 @ToString
-
 
 @Entity
 @Table(name  = "COMMENT")
