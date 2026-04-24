@@ -48,7 +48,7 @@ public class LoansService implements ILoansService
                         loan.getBorrowDate(),
                         loan.getExpectedReturnDate(),
                         loan.getActualReturnDate(),
-                        loan.getStatus(),
+                        loan.getLoanStatus(),
                         loan.getLateDays()
                 );
                 loansResponse.add(response);
@@ -115,7 +115,7 @@ public class LoansService implements ILoansService
             newLoan.setBorrowDate(LocalDateTime.now());
             newLoan.setExpectedReturnDate(LocalDateTime.now().plusDays(14));
             newLoan.setActualReturnDate(null);
-            newLoan.setStatus(LoansStatus.ENCOURS);
+            newLoan.setLoanStatus(LoansStatus.ENCOURS);
             newLoan.setLateDays(0);
 
             // Save JPA
@@ -128,7 +128,7 @@ public class LoansService implements ILoansService
                     savedLoan.getBorrowDate(),
                     savedLoan.getExpectedReturnDate(),
                     savedLoan.getActualReturnDate(),
-                    savedLoan.getStatus(),
+                    savedLoan.getLoanStatus(),
                     savedLoan.getLateDays()
 
             );
