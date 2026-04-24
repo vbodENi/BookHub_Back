@@ -4,25 +4,30 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.eni.bookhub_api.common.bo.Book;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/api")
-public class BooksController {
+public class BookController {
 
-    private IBooksBLL ibooksBLL;
+    private IBookBLL ibooksBLL;
 
-    public BooksController(IBooksBLL ibooksBLL) {
+    public BookController(IBookBLL ibooksBLL) {
         this.ibooksBLL = ibooksBLL;
     }
 
     @GetMapping("/books") 
-        public List<Book> getAllBooks(){
+        public List<BookDTO> getAllBooks(){
             return ibooksBLL.getAllBooks();
+        }
+
+    @GetMapping("/books/{id}") 
+        public BookDTO getBookById(@PathVariable int id){
+            return ibooksBLL.getBookById(id);
         }
 }
     

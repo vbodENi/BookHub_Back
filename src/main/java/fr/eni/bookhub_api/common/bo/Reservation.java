@@ -2,9 +2,21 @@ package fr.eni.bookhub_api.common.bo;
 
 import fr.eni.bookhub_api.common.enumeration.ReservationStatus;
 import jakarta.persistence.*;
-
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
+@ToString
 
 @Entity
 @Table(name  = "RESERVATION")
@@ -29,60 +41,6 @@ public class Reservation {
     @JoinColumn(name = "ID_USER")
     private User user;
 
-    // Empty constructor
-    public Reservation() {
-    }
-
-    // Full constructor
-    public Reservation(Integer id, User user, Book book,
-                       LocalDateTime reservationDate, ReservationStatus eReservationstatus) {
-        this.id = id;
-        this.user = user;
-        this.book = book;
-        this.reservationDate = reservationDate;
-        this.eReservationstatus = eReservationstatus;
-    }
-
-    // Getters and Setters
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
-    }
-
-    public LocalDateTime getReservationDate() {
-        return reservationDate;
-    }
-
-    public void setReservationDate(LocalDateTime reservationDate) {
-        this.reservationDate = reservationDate;
-    }
-
-    public ReservationStatus getStatus() {
-        return eReservationstatus;
-    }
-
-    public void setStatus(ReservationStatus eReservationstatus) {
-        this.eReservationstatus = eReservationstatus;
-    }
+ 
 }
 
