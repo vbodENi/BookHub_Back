@@ -5,14 +5,12 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Builder
 @ToString
-
 
 @Entity
 @Table(name  = "CATEGORY")
@@ -30,4 +28,5 @@ public class Category {
 
     @OneToMany(mappedBy = "category")
     private List<Book> books;
+
 }

@@ -1,4 +1,4 @@
-package fr.eni.bookhub_api.login;
+package fr.eni.bookhub_api.auth.login;
 
 public class LoginResponse
 {
