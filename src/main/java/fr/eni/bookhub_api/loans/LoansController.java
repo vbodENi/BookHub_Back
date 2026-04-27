@@ -28,4 +28,16 @@ public class LoansController {
     {
         return loansBLL.findLoansByUser(idUser);
     }
+
+    @GetMapping("/loans")
+    public ServiceResponse<?> findAllLoans(@RequestHeader("Authorization") String token)
+    {
+        return loansBLL.findAllLoansRole(token);
+    }
+
+    @PutMapping("/loans/{idLoans}")
+    public ServiceResponse<?> returnLoansById(@PathVariable("idLoans") String idLoans,@RequestHeader("Authorization") String token)
+    {
+        return loansBLL.updateLoan(token,idLoans);
+    }
 }

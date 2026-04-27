@@ -9,4 +9,6 @@ public interface ILoansService
 {
     ServiceResponse<LoanResponse> addLoan(LoanRequest loanRequest);
     ServiceResponse <List<LoanResponse>> findLoansByUser(String idUser);
+    ServiceResponse <List<LoanResponse>> findAllLoansRole(String token);
+    ServiceResponse <List<LoanResponse>> updateLoan(String token,String idLoans);
 }

@@ -8,11 +8,15 @@ import fr.eni.bookhub_api.common.dal.BookRepository;
 import fr.eni.bookhub_api.common.dal.UserRepository;
 import fr.eni.bookhub_api.common.enumeration.LoansStatus;
 import fr.eni.bookhub_api.common.dal.LoansRepository;
+import fr.eni.bookhub_api.security.JwtService;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LoansService implements ILoansService
@@ -20,11 +24,154 @@ public class LoansService implements ILoansService
     private LoansRepository loansRepository;
     private UserRepository userRepository;
     private BookRepository bookRepository;
+    private final JwtService jwtService;
 
-    public LoansService(LoansRepository loansRepository, UserRepository userRepository, BookRepository bookRepository) {
+    public LoansService(LoansRepository loansRepository, UserRepository userRepository, BookRepository bookRepository, JwtService jwtService) {
         this.loansRepository = loansRepository;
         this.userRepository = userRepository;
         this.bookRepository = bookRepository;
+        this.jwtService = jwtService;
+    }
+
+    public boolean isNumeric(String str) {
+        if (str == null || str.isEmpty()) return false;
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public ServiceResponse <List<LoanResponse>> updateLoan(String token,String idLoans)
+    {
+        try
+        {
+            boolean isNumeric = isNumeric(idLoans);
+            if (isNumeric == false) {
+                throw new RuntimeException("Invalid user ID");
+            }
+            Integer idLoansParse = Integer.parseInt(idLoans);
+
+            if (token.isEmpty()) {
+                throw new RuntimeException("Invalidate token");
+            }
+            String tokenClean = token.substring(7); // enlève "Bearer "
+
+            List<LoanResponse> loansResponse = new ArrayList<>();
+            String role = jwtService.extractRole(tokenClean);
+            Integer idUser = jwtService.extractIdUser(tokenClean);
+
+            Optional<User> optionalUser = userRepository.findById(idUser);
+
+            if (optionalUser.isEmpty()) {
+                throw new RuntimeException("User not found");
+            }
+
+            User user = optionalUser.get();
+
+            if(role == null|| !(role.equals("LIBRARIAN")))
+            {
+                throw new RuntimeException("Access denied");
+            }
+
+            Optional<Loans> optionalLoans = loansRepository.findById(idLoansParse);
+            if(optionalLoans.isEmpty())
+            {
+                throw new RuntimeException("Not find any loan");
+            }
+            Loans loan = optionalLoans.get();
+            loan.setLoanStatus(LoansStatus.RENDU);
+            loansRepository.save(loan);
+
+            return new ServiceResponse<>("2001", "Success");
+        }
+        catch (Exception ex)
+        {
+            switch (ex.getMessage()) {
+                case "User not found":
+                    return new ServiceResponse<>("7002", "User not found");
+
+                case "Access denied":
+                    return new ServiceResponse<>("7003", "Access denied");
+
+                case "Not find any loan":
+                    return new ServiceResponse<>("7004", "Not find any loan");
+
+                case "Invalid user ID":
+                    return new ServiceResponse<>("7005", "Invalid user ID");
+
+                case "Invalidate token":
+                    return new ServiceResponse<>("7006", "Invalidate token");
+
+                default:
+                    return new ServiceResponse<>("7000", "Fatal error");
+            }
+        }
+    }
+
+    public ServiceResponse <List<LoanResponse>> findAllLoansRole(String token)
+    {
+        try
+        {
+            if (token.isEmpty()) {
+                throw new RuntimeException("Invalidate token");
+            }
+            String tokenClean = token.substring(7); // enlève "Bearer "
+
+            List<LoanResponse> loansResponse = new ArrayList<>();
+            String role = jwtService.extractRole(tokenClean);
+            String email = jwtService.extractEmail(tokenClean);
+
+            Optional<User> optionalUser = userRepository.findByEmail(email);
+
+            if (optionalUser.isEmpty()) {
+                throw new RuntimeException("User not found");
+            }
+
+            User user = optionalUser.get();
+
+            if(role == null || !(role.equals("LIBRARIAN")))
+            {
+                throw new RuntimeException("Access denied");
+            }
+
+            List<Loans> loans = loansRepository.findAll();
+            if (loans.isEmpty()){
+                throw new RuntimeException("Not find any loan");
+            }
+            loans.forEach(loan -> {
+                LoanResponse response = new LoanResponse(
+                        loan.getId(),
+                        loan.getUser().getFirstName() + " " + loan.getUser().getLastName(),
+                        loan.getBook().getTitle(),
+                        loan.getBorrowDate(),
+                        loan.getExpectedReturnDate(),
+                        loan.getActualReturnDate(),
+                        loan.getLoanStatus(),
+                        loan.getLateDays()
+                );
+                loansResponse.add(response);
+            });
+
+            return new ServiceResponse<>("2001", "Success",loansResponse);
+        }
+        catch (Exception ex)
+        {
+            switch (ex.getMessage()) {
+                case "User not found":
+                    return new ServiceResponse<>("7002", "User not found");
+
+                case "Access denied":
+                    return new ServiceResponse<>("7003", "Access denied");
+
+                case "Not find any loan":
+                    return new ServiceResponse<>("7003", "Not find any loan");
+
+                default:
+                    return new ServiceResponse<>("7000", "Fatal error");
+            }
+        }
     }
 
     public ServiceResponse <List<LoanResponse>> findLoansByUser(String idUser)
@@ -32,6 +179,10 @@ public class LoansService implements ILoansService
         try
         {
             List<LoanResponse> loansResponse = new ArrayList<>();
+            boolean isNumeric = isNumeric(idUser);
+            if (isNumeric == false) {
+                throw new RuntimeException("Invalid user ID");
+            }
             Integer intIdUser = Integer.valueOf(idUser);
             if (intIdUser == null){
                 throw new RuntimeException("Fail to cast id");
@@ -65,11 +216,14 @@ public class LoansService implements ILoansService
                 case "Fail to cast id":
                     return new ServiceResponse<>("7002", "Fail to cast id");
 
+                case "Invalid user ID":
+                    return new ServiceResponse<>("7003", "Invalid user ID");
+
                 case "Not find any loan":
-                    return new ServiceResponse<>("7003", "Not find any loan");
+                    return new ServiceResponse<>("7004", "Not find any loan");
 
                 case "Any loans finds":
-                    return new ServiceResponse<>("7004", "Any loans finds");
+                    return new ServiceResponse<>("7005", "Any loans finds");
 
                 default:
                     return new ServiceResponse<>("7000", "Fatal error");

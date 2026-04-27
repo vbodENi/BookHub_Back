@@ -29,7 +29,7 @@ VALUES ('Charlie', 'Durand', 'charlie@mail.com', '$2a$10$j0Qtl5F5iH9BjQPo65/rwew
 
 IF NOT EXISTS (SELECT 1 FROM users WHERE email = 'david@mail.com')
 INSERT INTO users (first_name, last_name, email, password, phone, role, active, blocked, registration_date)
-VALUES ('David', 'Leroy', 'david@mail.com', '$2a$10$pE1pjZVEOIpkCY7.H9oI7uqMgUFuOBwJHDEkKgpIEn8B4jjZhkpSu', '0600000004', 'ADMIN', 0, 1, CURRENT_TIMESTAMP);
+VALUES ('David', 'Leroy', 'david@mail.com', '$2a$10$pE1pjZVEOIpkCY7.H9oI7uqMgUFuOBwJHDEkKgpIEn8B4jjZhkpSu', '0600000004', 'LIBRARIAN', 0, 1, CURRENT_TIMESTAMP);
 
 IF NOT EXISTS (SELECT 1 FROM book WHERE isbn = '1111111111')
 INSERT INTO book (title, author, isbn, description, category_id, total_copies, available_copies, average_rating, date_added)
@@ -53,6 +53,12 @@ VALUES ('Clean Code', 'Robert C. Martin', '4444444444', 'Bonnes pratiques dev', 
 )
 INSERT INTO loans (id_book, id_user, borrow_date, excepted_return_date, actual_return_date, loan_status, late_days)
 VALUES (1, 1, DATEADD(DAY, -10, CURRENT_TIMESTAMP), DATEADD(DAY, -2, CURRENT_TIMESTAMP), DATEADD(DAY, -1, CURRENT_TIMESTAMP), 'RENDU', 1);
+
+INSERT INTO loans (id_book, id_user, borrow_date, excepted_return_date, actual_return_date, loan_status, late_days)
+VALUES (4, 2, DATEADD(DAY, -10, CURRENT_TIMESTAMP), DATEADD(DAY, -2, CURRENT_TIMESTAMP), DATEADD(DAY, -1, CURRENT_TIMESTAMP), 'RETARD', 1);
+
+INSERT INTO loans (id_book, id_user, borrow_date, excepted_return_date, actual_return_date, loan_status, late_days)
+VALUES (3, 2, DATEADD(DAY, -10, CURRENT_TIMESTAMP), DATEADD(DAY, -2, CURRENT_TIMESTAMP), DATEADD(DAY, -1, CURRENT_TIMESTAMP), 'ENCOURS', 1);
 
 
       IF NOT EXISTS (
