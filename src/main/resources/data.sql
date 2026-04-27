@@ -17,19 +17,19 @@ VALUES ('Informatique', 'Livres IT et programmation');
 
 IF NOT EXISTS (SELECT 1 FROM users WHERE email = 'alice@mail.com')
 INSERT INTO users (first_name, last_name, email, password, phone, role, active, blocked, registration_date)
-VALUES ('Alice', 'Dupont', 'alice@mail.com', 'pwd123', '0600000001', 'USER', 1, 0, CURRENT_TIMESTAMP);
+VALUES ('Alice', 'Dupont', 'alice@mail.com', '$2a$10$cOvGSyebS0MY2A9fDdKM0ucd4N6btdECsMo6yIleYAKBRnQJ5sQ42', '0600000001', 'USER', 1, 0, CURRENT_TIMESTAMP);
 
 IF NOT EXISTS (SELECT 1 FROM users WHERE email = 'bob@mail.com')
 INSERT INTO users (first_name, last_name, email, password, phone, role, active, blocked, registration_date)
-VALUES ('Bob', 'Martin', 'bob@mail.com', 'pwd123', '0600000002', 'USER', 1, 0, CURRENT_TIMESTAMP);
+VALUES ('Bob', 'Martin', 'bob@mail.com', '$2a$10$RbtFg6/3T5XRaOkC96Z4KOrKjlFlJe5a64gTpfIQZj1CPE6bX1AcG', '0600000002', 'USER', 1, 0, CURRENT_TIMESTAMP);
 
 IF NOT EXISTS (SELECT 1 FROM users WHERE email = 'charlie@mail.com')
 INSERT INTO users (first_name, last_name, email, password, phone, role, active, blocked, registration_date)
-VALUES ('Charlie', 'Durand', 'charlie@mail.com', 'pwd123', '0600000003', 'ADMIN', 1, 0, CURRENT_TIMESTAMP);
+VALUES ('Charlie', 'Durand', 'charlie@mail.com', '$2a$10$j0Qtl5F5iH9BjQPo65/rwewx6HV/dUjH.hlI2IVk93Ghp/DG2xJYy', '0600000003', 'ADMIN', 1, 0, CURRENT_TIMESTAMP);
 
 IF NOT EXISTS (SELECT 1 FROM users WHERE email = 'david@mail.com')
 INSERT INTO users (first_name, last_name, email, password, phone, role, active, blocked, registration_date)
-VALUES ('David', 'Leroy', 'david@mail.com', 'pwd123', '0600000004', 'ADMIN', 0, 1, CURRENT_TIMESTAMP);
+VALUES ('David', 'Leroy', 'david@mail.com', '$2a$10$pE1pjZVEOIpkCY7.H9oI7uqMgUFuOBwJHDEkKgpIEn8B4jjZhkpSu', '0600000004', 'ADMIN', 0, 1, CURRENT_TIMESTAMP);
 
 IF NOT EXISTS (SELECT 1 FROM book WHERE isbn = '1111111111')
 INSERT INTO book (title, author, isbn, description, category_id, total_copies, available_copies, average_rating, date_added)
