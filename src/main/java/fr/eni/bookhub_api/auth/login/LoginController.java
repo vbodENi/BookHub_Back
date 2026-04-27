@@ -5,6 +5,10 @@
 //
 //@CrossOrigin
 //@RestController
+
+//import org.springframework.web.bind.annotation.RequestMapping;
+//
+//@RequestMapping("/api")
 //public class LoginController
 //{
 //    private final LoginService loginService;
@@ -13,7 +17,7 @@
 //        this.loginService = loginService;
 //    }
 //
-//    @PostMapping("/login/auth")
+//    @PostMapping("/auth/login")
 //    public LoginResponse login(@RequestBody User user)
 //    {
 //        return loginService.checkAuth(user.getEmail(), user.getPassword());
