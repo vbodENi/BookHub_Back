@@ -1,9 +1,9 @@
 package fr.eni.bookhub_api.books;
 
-import java.util.List;
-
-import fr.eni.bookhub_api.books.dao.BookRepository;
+import fr.eni.bookhub_api.common.dal.BookRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
