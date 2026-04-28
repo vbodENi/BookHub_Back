@@ -1,5 +1,6 @@
 package fr.eni.bookhub_api.auth.login;
 
+import fr.eni.bookhub_api.common.ServiceResponse;
 import fr.eni.bookhub_api.common.bo.User;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,7 @@ public class LoginController
     }
 
     @PostMapping("/auth/login")
-    public LoginResponse login(@RequestBody User user)
+    public ServiceResponse<LoginResponse> login(@RequestBody User user)
     {
         return loginService.checkAuth(user.getEmail(), user.getPassword());
     }

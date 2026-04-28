@@ -69,6 +69,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Comment> comments;
 
+
+
     public User(String mail, String password)
     {
         this.email = mail;
