@@ -23,10 +23,10 @@ public class LoansController {
         return loansBLL.addLoan(loanRequest);
     }
 
-    @GetMapping("/loans/{idUser}")
-    public ServiceResponse<?> findLoansByUser(@PathVariable("idUser") String idUser)
+    @GetMapping("/loans/my")
+    public ServiceResponse<?> findLoansByUser(@RequestHeader("Authorization") String token)
     {
-        return loansBLL.findLoansByUser(idUser);
+        return loansBLL.findLoansByUser(token);
     }
 
     @GetMapping("/loans")

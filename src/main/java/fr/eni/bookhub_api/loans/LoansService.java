@@ -10,11 +10,13 @@ import fr.eni.bookhub_api.common.enumeration.LoansStatus;
 import fr.eni.bookhub_api.common.dal.LoansRepository;
 import fr.eni.bookhub_api.security.JwtService;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +44,7 @@ public class LoansService implements ILoansService
             return false;
         }
     }
+
 
     public ServiceResponse <List<LoanResponse>> updateLoan(String token,String idLoans)
     {
@@ -174,20 +177,27 @@ public class LoansService implements ILoansService
         }
     }
 
-    public ServiceResponse <List<LoanResponse>> findLoansByUser(String idUser)
+    public ServiceResponse <List<LoanResponse>> findLoansByUser(String token)
     {
         try
         {
             List<LoanResponse> loansResponse = new ArrayList<>();
-            boolean isNumeric = isNumeric(idUser);
-            if (isNumeric == false) {
-                throw new RuntimeException("Invalid user ID");
+            if (token.isEmpty()) {
+                throw new RuntimeException("Invalidate token");
             }
-            Integer intIdUser = Integer.valueOf(idUser);
-            if (intIdUser == null){
-                throw new RuntimeException("Fail to cast id");
+
+            String tokenClean = token.substring(7); // enlève "Bearer "
+
+            // Vérification expiration
+            if (jwtService.isTokenExpired(tokenClean)) {
+                throw new RuntimeException("Token expired");
             }
-            List<Loans> loans = loansRepository.findByUserId(intIdUser);
+            Integer idUser = jwtService.extractIdUser(tokenClean);
+
+            if (idUser == null){
+                throw new RuntimeException("Fail to extract id");
+            }
+            List<Loans> loans = loansRepository.findByUserId(idUser);
             if (loans.isEmpty()){
                 throw new RuntimeException("Not find any loan");
             }
@@ -213,8 +223,8 @@ public class LoansService implements ILoansService
         catch(Exception ex)
         {
             switch (ex.getMessage()) {
-                case "Fail to cast id":
-                    return new ServiceResponse<>("7002", "Fail to cast id");
+                case "Fail to extract id":
+                    return new ServiceResponse<>("7002", "Fail to extract id");
 
                 case "Invalid user ID":
                     return new ServiceResponse<>("7003", "Invalid user ID");
@@ -222,8 +232,11 @@ public class LoansService implements ILoansService
                 case "Not find any loan":
                     return new ServiceResponse<>("7004", "Not find any loan");
 
+                case "Token expired":
+                    return new ServiceResponse<>("7005", "Token expired");
+
                 case "Any loans finds":
-                    return new ServiceResponse<>("7005", "Any loans finds");
+                    return new ServiceResponse<>("7006", "Any loans finds");
 
                 default:
                     return new ServiceResponse<>("7000", "Fatal error");
