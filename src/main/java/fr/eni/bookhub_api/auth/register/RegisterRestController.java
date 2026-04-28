@@ -5,8 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
+@RequestMapping("/api/auth")
 public class RegisterRestController {
 
     private RegisterService registerService;
@@ -15,7 +15,7 @@ public class RegisterRestController {
         this.registerService = registerService;
     }
 
-    @PostMapping("/api/auth/register")
+    @PostMapping("/register")
     //pour forcer à créer le statut 201
     @ResponseStatus(HttpStatus.CREATED)
     //on enveloppe la réponse dans la classe ServiceResponse pour standardiser toutes les réponses
