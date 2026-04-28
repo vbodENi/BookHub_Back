@@ -33,6 +33,7 @@ public class AppConfigSecurity {
                         .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/loans").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/loans").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/loans/my").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/api/loans/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/books").permitAll()
