@@ -244,12 +244,22 @@ public class LoansService implements ILoansService
         }
     }
 
-    public ServiceResponse<LoanResponse> addLoan(LoanRequest request)
+    public ServiceResponse<LoanResponse> addLoan(LoanRequest request,String token)
     {
         try
         {
+
+            boolean isNumeric = isNumeric(request.getIdBook());
+            if (!isNumeric) {
+                throw new RuntimeException("Invalid book ID");
+            }
             Integer idBook = Integer.valueOf(request.getIdBook());
-            Integer idUser = Integer.valueOf(request.getIdUser());
+
+            if (token.isEmpty()) {
+                throw new RuntimeException("Invalidate token");
+            }
+            String tokenClean = token.substring(7); // enlève "Bearer "
+            Integer idUser = jwtService.extractIdUser(tokenClean);
 
             // Récupération user
             User user = userRepository.findById(idUser)
@@ -305,6 +315,13 @@ public class LoansService implements ILoansService
         } catch (RuntimeException ex) {
 
             switch (ex.getMessage()) {
+
+                case "Invalid book ID":
+                    return new ServiceResponse<>("7000", "Invalid book ID");
+
+                case "Invalidate token":
+                    return new ServiceResponse<>("7001", "Invalidate token");
+
                 case "BOOK_ALREADY_BORROWED":
                     return new ServiceResponse<>("7002", "Book already borrowed and not returned");
 
