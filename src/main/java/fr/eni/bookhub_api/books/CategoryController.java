@@ -18,7 +18,7 @@ public class CategoryController {
         this.iCategoryBLL = iCategoryBLL;
     }
 
-    @GetMapping
+    @GetMapping("/categories")
         public List<CategoryDTO> getAllCategories(){
             return iCategoryBLL.getAllCategories();
         }

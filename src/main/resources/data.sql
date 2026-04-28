@@ -14,6 +14,10 @@ IF NOT EXISTS (SELECT 1 FROM category WHERE label = 'Informatique')
 INSERT INTO category (label, description)
 VALUES ('Informatique', 'Livres IT et programmation');
 
+IF NOT EXISTS (SELECT 1 FROM category WHERE label = 'Psychologie')                                                                                                                                                           
+INSERT INTO category (label, description)                                                                                                                                                                                    
+VALUES ('Psychologie', 'Psychologie et développement personnel');  
+
 
 IF NOT EXISTS (SELECT 1 FROM users WHERE email = 'alice@mail.com')
 INSERT INTO users (first_name, last_name, email, password, phone, role, active, blocked, registration_date)
@@ -32,21 +36,24 @@ INSERT INTO users (first_name, last_name, email, password, phone, role, active, 
 VALUES ('David', 'Leroy', 'david@mail.com', '$2a$10$pE1pjZVEOIpkCY7.H9oI7uqMgUFuOBwJHDEkKgpIEn8B4jjZhkpSu', '0600000004', 'LIBRARIAN', 0, 1, CURRENT_TIMESTAMP);
 
 IF NOT EXISTS (SELECT 1 FROM book WHERE isbn = '1111111111')
-INSERT INTO book (title, author, isbn, description, category_id, total_copies, available_copies, average_rating, date_added)
-VALUES ('Le Petit Prince', 'Antoine de Saint-Exupéry', '1111111111', 'Conte philosophique', 1, 5, 3, 4.5, CURRENT_TIMESTAMP);
+INSERT INTO book (title, author, isbn, description, category_id, cover_url, total_copies, available_copies, average_rating, date_added)
+VALUES ('Le Petit Prince', 'Antoine de Saint-Exupéry', '1111111111', 'Conte philosophique', 1, '/assets/covers/petit-prince.webp', 5, 3, 4.5, CURRENT_TIMESTAMP);
 
 IF NOT EXISTS (SELECT 1 FROM book WHERE isbn = '2222222222')
-INSERT INTO book (title, author, isbn, description, category_id, total_copies, available_copies, average_rating, date_added)
-VALUES ('Une brève histoire du temps', 'Stephen Hawking', '2222222222', 'Cosmologie', 2, 3, 2, 4.7, CURRENT_TIMESTAMP);
+INSERT INTO book (title, author, isbn, description, category_id, cover_url, total_copies, available_copies, average_rating, date_added)
+VALUES ('Une brève histoire du temps', 'Stephen Hawking', '2222222222', 'Cosmologie', 2, '/assets/covers/histoire-temps.webp', 3, 2, 4.7, CURRENT_TIMESTAMP);
 
 IF NOT EXISTS (SELECT 1 FROM book WHERE isbn = '3333333333')
-INSERT INTO book (title, author, isbn, description, category_id, total_copies, available_copies, average_rating, date_added)
-VALUES ('Sapiens', 'Yuval Noah Harari', '3333333333', 'Histoire de l’humanité', 3, 4, 4, 4.6, CURRENT_TIMESTAMP);
+INSERT INTO book (title, author, isbn, description, category_id, cover_url, total_copies, available_copies, average_rating, date_added)
+VALUES ('Sapiens', 'Yuval Noah Harari', '3333333333', 'Histoire de l’humanité', 3, '/assets/covers/sapiens.webp', 4, 4, 4.6, CURRENT_TIMESTAMP);
 
 IF NOT EXISTS (SELECT 1 FROM book WHERE isbn = '4444444444')
-INSERT INTO book (title, author, isbn, description, category_id, total_copies, available_copies, average_rating, date_added)
-VALUES ('Clean Code', 'Robert C. Martin', '4444444444', 'Bonnes pratiques dev', 4, 2, 1, 4.8, CURRENT_TIMESTAMP);
+INSERT INTO book (title, author, isbn, description, category_id, cover_url, total_copies, available_copies, average_rating, date_added)
+VALUES ('Clean Code', 'Robert C. Martin', '4444444444', 'Bonnes pratiques dev', 4, '/assets/covers/clean-code.webp', 2, 1, 4.8, CURRENT_TIMESTAMP);
 
+IF NOT EXISTS (SELECT 1 FROM book WHERE isbn = '7777777777')
+INSERT INTO book (title, author, isbn, description, category_id, cover_url, total_copies, available_copies, average_rating, date_added)
+VALUES ('Influence et manipulation', 'Robert Cialdini', '7777777777', 'Influence et manipulation', 5, '/assets/covers/influence-et-manipulation.webp', 6, 0, 4.6, CURRENT_TIMESTAMP);
    IF NOT EXISTS (
     SELECT 1 FROM loans
     WHERE id_book = 1 AND id_user = 1
