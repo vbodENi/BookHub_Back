@@ -1,8 +1,7 @@
 package fr.eni.bookhub_api.security;
 
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import fr.eni.bookhub_api.common.bo.User;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,9 +28,11 @@ public class JwtService
 
     private final long EXPIRATION = 1000 * 60 * 60; // 1h
 
-    public String generateToken(String email) {
+    public String generateToken(User user) {
         return Jwts.builder()
-                .setSubject(email)
+                .setSubject(user.getEmail())
+                .claim("role", user.getRole())
+                .claim("idUser", user.getId())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
                 .signWith(getSignInKey())
@@ -46,6 +47,39 @@ public class JwtService
                 .getBody()
                 .getSubject();
     }
+    public Integer extractIdUser(String token) {
+        return Jwts.parser()
+                .setSigningKey(getSignInKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .get("idUser", Integer.class);
+    }
+
+
+    public String extractRole(String token) {
+        return Jwts.parser()
+                .setSigningKey(getSignInKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .get("role", String.class);
+    }
+
+    public boolean isTokenExpired(String token) {
+        try {
+            Claims claims = Jwts.parser()
+                    .setSigningKey(getSignInKey())
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+
+            return claims.getExpiration().before(new Date());
+
+        } catch (ExpiredJwtException e) {
+            return true;
+        }
+    }
 
     public boolean isTokenValid(String token) {
         try {
@@ -56,3 +90,4 @@ public class JwtService
         }
     }
 }
+ 

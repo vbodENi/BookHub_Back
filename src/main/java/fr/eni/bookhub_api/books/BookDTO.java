@@ -18,7 +18,7 @@ public class BookDTO {
       private int availableCopies;
       private LocalDateTime dateAdded;
       private Double averageRating;
-      private String categoryLabel;
+      private CategoryDTO category;
 
       public BookDTO(Book book) {
           this.id = book.getId();
@@ -31,7 +31,7 @@ public class BookDTO {
           this.availableCopies = book.getAvailableCopies();
           this.dateAdded = book.getDateAdded();
           this.averageRating = book.getAverageRating();
-          this.categoryLabel = book.getCategory() != null ? book.getCategory().getLabel() : null;
+          this.category = book.getCategory() != null ? new CategoryDTO(book.getCategory()) : null;
       }
   
 }
