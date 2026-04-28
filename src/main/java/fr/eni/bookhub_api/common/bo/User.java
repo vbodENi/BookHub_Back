@@ -51,6 +51,9 @@ public class User {
     @Column(name = "BLOCKED",nullable = false)
     private boolean blocked;
 
+    @Column(name = "DELETED_AT")
+    private LocalDateTime deletedAt;
+
     @OneToMany(mappedBy = "user")
     private List<Loans> loans;
 
@@ -65,6 +68,8 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Comment> comments;
+
+
 
     public User(String mail, String password)
     {
