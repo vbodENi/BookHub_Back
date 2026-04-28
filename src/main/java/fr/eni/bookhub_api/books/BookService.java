@@ -1,7 +1,10 @@
 package fr.eni.bookhub_api.books;
 
 import fr.eni.bookhub_api.common.dal.BookRepository;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -24,7 +27,7 @@ public class BookService implements IBookBLL {
 
       return bookRepository.findById(id)
                 .map(BookDTO::new)
-                .orElseThrow(() -> new RuntimeException("Livre introuvable : " + id));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Livre introuvable : " + id));
   }
 
     
