@@ -19,8 +19,9 @@ public class LoansController {
     }
 
     @PostMapping("/loans")
-    public ServiceResponse<LoanResponse> addLoans(@RequestBody LoanRequest loanRequest) {
-        return loansBLL.addLoan(loanRequest);
+    public ServiceResponse<LoanResponse> addLoans(@RequestBody LoanRequest loanRequest,@RequestHeader("Authorization") String token)
+    {
+        return loansBLL.addLoan(loanRequest,token);
     }
 
     @GetMapping("/loans/my")
